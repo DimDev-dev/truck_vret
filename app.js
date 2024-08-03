@@ -1,4 +1,5 @@
-document.querySelectorAll(".form").forEach((form) => {
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".form");
   const result = form.querySelector(".result p");
   const submit = form.querySelector("button");
 
@@ -11,11 +12,9 @@ document.querySelectorAll(".form").forEach((form) => {
 
     const total_demi_palette =
       parseInt(grande_palette) * demi_palettePerGrande + parseInt(demi_palette);
+
     const rest_demi_palette_sucess = max_palette - total_demi_palette;
     const rest_demi_palette_error = total_demi_palette - max_palette;
-
-    const palettes = Math.floor(total_demi_palette / demi_palettePerGrande);
-    const demi_palettes = total_demi_palette % demi_palettePerGrande;
 
     console.log("total_demi_palette", total_demi_palette);
     console.log("grande_palette", grande_palette);
@@ -30,15 +29,21 @@ document.querySelectorAll(".form").forEach((form) => {
         rest_demi_palette_sucess % demi_palettePerGrande
       } demi-palette(s) disponible(s).`;
     } else {
+      const additional_trucks =
+        Math.ceil(rest_demi_palette_error / max_palette) + 1;
+      const remaining_palettes = rest_demi_palette_error % max_palette;
       result.classList.remove("success");
       result.classList.add("error");
-      result.innerHTML = `Vous ne pouvez pas utiliser le camion, il y a ${Math.floor(
-        rest_demi_palette_error / demi_palettePerGrande
+      result.innerHTML = `Il vous faut ${additional_trucks} camion(s) avec ${Math.floor(
+        remaining_palettes / demi_palettePerGrande
       )} palette(s) et ${
-        rest_demi_palette_error % demi_palettePerGrande
-      } demi-palette(s) de trop.`;
+        remaining_palettes % demi_palettePerGrande
+      } demi-palette(s) dans le dernier camion.`;
     }
   };
 
-  submit.addEventListener("click", canUseTruck);
+  submit.addEventListener("click", (e) => {
+    e.preventDefault();
+    canUseTruck();
+  });
 });
