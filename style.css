@@ -112,11 +112,6 @@ button:hover {
   margin-top: 10px;
 }
 
-.result p.error {
-  color: #ff0000;
-  font-weight: bold;
-}
-
 .result p.success {
   color: #10b981;
   font-weight: bold;
