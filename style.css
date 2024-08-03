@@ -1,6 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,11 +17,51 @@ body {
   font-family: "Arial", sans-serif;
 }
 
+h1 {
+  text-align: center;
+}
 .container {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  body {
+    height: auto;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+
+  .form input {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .form {
